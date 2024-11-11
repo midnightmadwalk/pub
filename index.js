@@ -78,7 +78,7 @@ class KeyDisplay {
             }
         });
     }
-    
+
     updatePosition() {
         this.map.get(W).style.top = `${window.innerHeight - 150}px`;
         this.map.get(A).style.top = `${window.innerHeight - 100}px`;
@@ -201,11 +201,11 @@ class CharacterControls {
             this.model.position.x += moveX
             this.model.position.z += moveZ
             this.updateCameraTarget(moveX, moveZ)
-                // Update drone position to follow the character
-                const offset = new THREE.Vector3(-20, 30, -40); 
-                // Distance behind the character
-                drone.position.copy(this.model.position).add(offset);
-                drone.rotation.copy(this.model.rotation); // Make the drone match the
+            // Update drone position to follow the character
+            const offset = new THREE.Vector3(-20, 30, -40);
+            // Distance behind the character
+            drone.position.copy(this.model.position).add(offset);
+            drone.rotation.copy(this.model.rotation); // Make the drone match the
         }
 
         // console.log(stairs[0].position.y, stairs[1].position.y, stairs[2].position.y, stairs[3].position.y)
@@ -218,10 +218,10 @@ class CharacterControls {
                 Math.abs(a.position.x - this.model.position.x) < 0.8
                 && Math.abs(a.position.z - this.model.position.z) < 0.8
                 && Math.abs(a.position.y - this.model.position.y) < 1
-        ) {
-            this.model.position.y = a.position.y
-            // this.model.position.x = a.position.x
-            // this.model.position.z = a.position.z
+            ) {
+                this.model.position.y = a.position.y
+                // this.model.position.x = a.position.x
+                // this.model.position.z = a.position.z
                 // console.log(Math.ceil(Math.max(a.position.y, this.model.position.y)))
             }
         });
@@ -230,15 +230,15 @@ class CharacterControls {
 
     updateCameraTarget(moveX, moveZ) {
         // Remove the camera position update to keep the camera fixed
-        this.camera.position.x += moveX ;
-        this.camera.position.z += moveZ ;
-    
+        this.camera.position.x += moveX;
+        this.camera.position.z += moveZ;
+
         // Update only the camera target (the position the camera looks at)
         this.cameraTarget.x = this.model.position.x;
         this.cameraTarget.z = this.model.position.z;
         this.orbitControl.target = this.cameraTarget; // Orbit controls will update the camera view accordingly
     }
-    
+
     directionOffset(keysPressed) {
         var directionOffset = 0 // w
 
@@ -273,22 +273,22 @@ class CharacterControls {
 // Load textures for the cube faces
 const textureLoader_cube = new THREE.TextureLoader();
 const textures = {
-  front: textureLoader_cube.load('collage.jpg'),
-  back: textureLoader_cube.load('collage.jpg'),
-  top: textureLoader_cube.load('collage.jpg'),
-  bottom: textureLoader_cube.load('collage.jpg'),
-  left: textureLoader_cube.load('collage.jpg'), // Earth base (adjust if you want to change)
-  right: textureLoader_cube.load('collage.jpg'), // Earth base (adjust if you want to change)
+    front: textureLoader_cube.load('collage.jpg'),
+    back: textureLoader_cube.load('collage.jpg'),
+    top: textureLoader_cube.load('collage.jpg'),
+    bottom: textureLoader_cube.load('collage.jpg'),
+    left: textureLoader_cube.load('collage.jpg'), // Earth base (adjust if you want to change)
+    right: textureLoader_cube.load('collage.jpg'), // Earth base (adjust if you want to change)
 };
 
 const cubeGeometry = new THREE.BoxGeometry(500, 500, 500); // Scale the cube to be large enough
 const cubeMaterials = [
-  new THREE.MeshBasicMaterial({ map: textures.front, side: THREE.BackSide }), // Front
-  new THREE.MeshBasicMaterial({ map: textures.back, side: THREE.BackSide }), // Back
-  new THREE.MeshBasicMaterial({ map: textures.top, side: THREE.BackSide }), // Top
-  new THREE.MeshBasicMaterial({ map: textures.bottom, side: THREE.BackSide }), // Bottom
-  new THREE.MeshBasicMaterial({ map: textures.left, side: THREE.BackSide }), // Left
-  new THREE.MeshBasicMaterial({ map: textures.right, side: THREE.BackSide }), // Right
+    new THREE.MeshBasicMaterial({ map: textures.front, side: THREE.BackSide }), // Front
+    new THREE.MeshBasicMaterial({ map: textures.back, side: THREE.BackSide }), // Back
+    new THREE.MeshBasicMaterial({ map: textures.top, side: THREE.BackSide }), // Top
+    new THREE.MeshBasicMaterial({ map: textures.bottom, side: THREE.BackSide }), // Bottom
+    new THREE.MeshBasicMaterial({ map: textures.left, side: THREE.BackSide }), // Left
+    new THREE.MeshBasicMaterial({ map: textures.right, side: THREE.BackSide }), // Right
 ];
 
 // Create the skybox
@@ -298,7 +298,7 @@ scene.add(cube);
 
 // Update cube's position to always follow the camera
 function updateSkyboxPosition() {
-  cube.position.set(camera.position.x, camera.position.y, camera.position.z);
+    cube.position.set(camera.position.x, camera.position.y, camera.position.z);
 }
 
 const earth = scene.getObjectByName('earth');  // Assuming earth is added with a name
@@ -443,7 +443,7 @@ const texture = textureLoader.load('eq.png'); // Replace with the actual path to
 const stepGeometry = new THREE.BoxGeometry(7, 0.8, 1); // Define the step geometry
 
 // Step material with texture
-const stepMaterial = new THREE.MeshLambertMaterial({ 
+const stepMaterial = new THREE.MeshLambertMaterial({
     map: texture,  // Apply the texture to the material
     side: THREE.DoubleSide
 });
@@ -467,7 +467,7 @@ for (let i = 0; i < steps; i++) {
     scene.add(step);
 
 
-    
+
 }
 
 
@@ -492,6 +492,17 @@ function createTextRing(stepIndex) {
 for (let i = 1; i < 6; i++) {
     rings.push(createTextRing(i * Math.floor(steps / 5)));
 }
+
+
+// Scroll and animation control
+let characterPosition = 0;
+var scrollAmount = 0;
+let touchStartY = 0;
+let hasBlinked = false;
+var currentPortalIndex = -1;
+const overlay = document.getElementById('overlay');
+let oldDeltaY = 0;
+
 
 
 function animate2() {
@@ -519,6 +530,8 @@ function animate2() {
                 }
             }
         });
+
+        // characterControls.position.y += 0.01
     }
 
     // Hide the image after a certain time (e.g., 5 seconds)
@@ -541,15 +554,11 @@ var portalImages = [
 
 
 
-// Scroll and animation control
-let characterPosition = 0;
-let scrollAmount = 0;
-let touchStartY = 0;
-let hasBlinked = false;
-var currentPortalIndex = -1;
-const overlay = document.getElementById('overlay');
-let oldDeltaY = 0;
-window.addEventListener('wheel', (event) => {
+
+
+
+
+function a(event) {
     // Determine scroll direction
     const scrollDirection = event.deltaY > 0 ? 1 : -1;
 
@@ -573,38 +582,31 @@ window.addEventListener('wheel', (event) => {
             characterControls.model.rotation.set(targetStep.rotation.x, targetStep.rotation.y + Math.PI, targetStep.rotation.z);
         }
 
-        // Drone follows the character from behind, maintain a fixed offset
-// Camera follow settings for climbing up and down (same for both)
-const cameraOffset = new THREE.Vector3(0, 5, -10); // Adjust Y for height, Z for distance behind
+        // Camera follow settings
+        const cameraOffset = new THREE.Vector3(0, 5, -10); // Adjust Y for height, Z for distance behind
 
-// Modify the character update function
-characterControls.updateCameraTarget = function() {
-    // Calculate offset position behind the character
-    const behindPosition = new THREE.Vector3(0, 0, 1); // Point behind
-    behindPosition.applyQuaternion(this.model.quaternion).normalize(); // Rotate behind point with character's rotation
-    behindPosition.multiplyScalar(cameraOffset.length()); // Scale to desired distance
-    behindPosition.add(this.model.position); // Move to behind character
+        // Modify the character update function
+        characterControls.updateCameraTarget = function () {
+            // Calculate offset position behind the character
+            const behindPosition = new THREE.Vector3(0, 0, 1); // Point behind
+            behindPosition.applyQuaternion(this.model.quaternion).normalize(); // Rotate behind point with character's rotation
+            behindPosition.multiplyScalar(cameraOffset.length()); // Scale to desired distance
+            behindPosition.add(this.model.position); // Move to behind character
 
-    // Set camera position and look at character
-    camera.position.lerp(behindPosition, 0.05); // Smoothly follow with linear interpolation
-    camera.lookAt(this.model.position.x, this.model.position.y + 2, this.model.position.z); // Adjust Y for eye level
-};
+            // Set camera position and look at character
+            camera.position.lerp(behindPosition, 0.05); // Smoothly follow with linear interpolation
+            camera.lookAt(this.model.position.x, this.model.position.y + 2, this.model.position.z); // Adjust Y for eye level
+        };
 
 
         // Camera looks at the character to keep them in view
         camera.lookAt(characterControls.model.position); // Always look at the character
     }
+}
+
+
+window.addEventListener('wheel', (event) => {
+    a(event)
 });
 
-// window.addEventListener('DOMContentLoaded', async () => {
-//     // Wait for 1 second
-//     await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-//     // Scroll smoothly to 500 pixels down the page
-//     window.scrollTo({
-//         top: 500,
-//         behavior: 'smooth'
-//     });
-    
-//     console.log('Scrolling to 500 pixels down the page');
-// });
+
