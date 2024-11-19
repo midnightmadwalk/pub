@@ -6,16 +6,19 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 // ============================================
 // Basic Three.js setup
+let threeCanvas = document.getElementById("three-canvas");
 let scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     0.1,
-    1000
+    1000,
 );
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+
+let { width: w, height: h } = threeCanvas.getBoundingClientRect();
+renderer.setSize(w, h);
+threeCanvas.appendChild(renderer.domElement);
 
 // --------------------- UTILS
 
@@ -25,7 +28,6 @@ const S = "s";
 const D = "d";
 const SHIFT = "shift";
 const DIRECTIONS = [W, A, S, D];
-
 
 class CharacterControls {
     // state
@@ -48,7 +50,7 @@ class CharacterControls {
         animationsMap,
         orbitControl,
         camera,
-        currentAction
+        currentAction,
     ) {
         this.model = model;
         this.mixer = mixer;
@@ -70,7 +72,7 @@ class CharacterControls {
 
     update(delta, keysPressed) {
         const directionPressed = DIRECTIONS.some(
-            (key) => keysPressed[key] == true
+            (key) => keysPressed[key] == true,
         );
 
         var play = "";
@@ -98,7 +100,7 @@ class CharacterControls {
             // calculate towards camera direction
             var angleYCameraDirection = Math.atan2(
                 this.camera.position.x - this.model.position.x,
-                this.camera.position.z - this.model.position.z
+                this.camera.position.z - this.model.position.z,
             );
             // diagonal movement angle offset
             var directionOffset = this.directionOffset(keysPressed);
@@ -106,7 +108,7 @@ class CharacterControls {
             // rotate model
             this.rotateQuarternion.setFromAxisAngle(
                 this.rotateAngle,
-                angleYCameraDirection + directionOffset
+                angleYCameraDirection + directionOffset,
             );
             this.model.quaternion.rotateTowards(this.rotateQuarternion, 0.2);
 
@@ -116,7 +118,7 @@ class CharacterControls {
             this.walkDirection.normalize();
             this.walkDirection.applyAxisAngle(
                 this.rotateAngle,
-                directionOffset
+                directionOffset,
             );
 
             // run/walk velocity
@@ -161,7 +163,6 @@ class CharacterControls {
         this.camera.position.x += moveX;
 
         this.camera.position.z += moveZ;
-
 
         // Update only the camera target (the position the camera looks at)
         this.cameraTarget.x = this.model.position.x;
@@ -235,19 +236,11 @@ if (earth) {
     earth.position.set(camera.position.x, -50, camera.position.z); // Keeping it below the camera
 }
 
-
 // CAMERA
 // const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.x = 3.82970197029123;
 camera.position.y = 7.209891012098961;
 camera.position.z = 8.167297687379282;
-
-
-// RENDERER
-// const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.shadowMap.enabled = true;
 
 // CONTROLS
 const orbitControls = new OrbitControls(camera, renderer.domElement);
@@ -267,7 +260,7 @@ light();
 // MODEL WITH ANIMATIONS
 var characterControls;
 new GLTFLoader().load(
-    "public/Soldier.glb",
+    "Soldier.glb",
     function (gltf) {
         const model = gltf.scene;
 
@@ -276,7 +269,7 @@ new GLTFLoader().load(
 
         // Rotate the model to face the reverse direction (180 degrees around the Y-axis)
         model.rotation.y = Math.PI; // 180 degrees in radians
-        ``
+        ``;
         // Set shadow properties
         model.traverse(function (object) {
             if (object.isMesh) object.castShadow = true;
@@ -302,13 +295,13 @@ new GLTFLoader().load(
             animationsMap,
             orbitControls,
             camera,
-            "Idle"
+            "Idle",
         );
     },
     undefined,
     function (error) {
         console.error("An error occurred while loading the .glb file:", error);
-    }
+    },
 );
 
 // Create the drone (a cube for simplicity)
@@ -329,7 +322,7 @@ document.addEventListener(
             keysPressed[event.key.toLowerCase()] = true;
         }
     },
-    false
+    false,
 );
 document.addEventListener(
     "keyup",
@@ -337,13 +330,12 @@ document.addEventListener(
         keyDisplayQueue.up(event.key);
         keysPressed[event.key.toLowerCase()] = false;
     },
-    false
+    false,
 );
 
 const clock = new THREE.Clock();
 // ANIMATE
 
-document.body.appendChild(renderer.domElement);
 animate2();
 
 function light() {
@@ -436,7 +428,6 @@ for (let i = 1; i < 6; i++) {
 }
 let justOutsideRing = false;
 
-
 function animate2() {
     let mixerUpdateDelta = clock.getDelta();
     if (characterControls) {
@@ -450,7 +441,6 @@ function animate2() {
             // Check if the character is close enough to the portal ring
             const distance = characterControls.model.position.distanceTo(
                 ring.position,
-
             );
 
             if (distance < 1) {
@@ -467,15 +457,12 @@ function animate2() {
                     const overlay = document.getElementById("overlay");
                     overlay.style.display = "block";
 
-
                     characterControls.model.position.add({
-
                         x: 0,
 
                         y: 0.5,
 
                         z: 0.5,
-
                     });
                 }
             }
@@ -490,13 +477,18 @@ function animate2() {
         }, 500); // Adjust the time as needed
     }
 
-
     // Log the current camera position
     renderer.render(scene, camera);
     requestAnimationFrame(animate2);
 }
 // Array of portal images
-var portalImages = ["pictureok.jpg", "pictureok1.jpg", "pictureok2.jpg", "pictureok3.jpg", "pictureok4.jpg"];
+var portalImages = [
+    "pictureok.jpg",
+    "pictureok1.jpg",
+    "pictureok2.jpg",
+    "pictureok3.jpg",
+    "pictureok4.jpg",
+];
 var currentPortalIndex = -1;
 
 var isClimbing = false; // Flag to track if the character is climbing
@@ -513,7 +505,6 @@ window.addEventListener("wheel", (event) => {
     climbDirection = event.deltaY > 0 ? 1 : -1;
     if (isClimbing || hasScrolled) return;
 
-
     // Set hasScrolled to true to prevent further manual scrolling
     hasScrolled = true;
 
@@ -524,7 +515,6 @@ window.addEventListener("wheel", (event) => {
     startClimbing();
 });
 
-
 // DOM Content Loaded Event
 window.addEventListener("DOMContentLoaded", async (event) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -532,13 +522,13 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     if (isClimbing || hasScrolled) return; // Ignore scroll if already climbing or scrolled once
 
     // Set hasScrolled to true to prevent further manual scrolling
-    hasScrolled = true;
+    // hasScrolled = true;
 
-    // Prevent default scroll behavior
-    event.preventDefault();
+    // // Prevent default scroll behavior
+    // event.preventDefault();
 
-    // Start climbing the stairs automatically
-    startClimbing();
+    // // Start climbing the stairs automatically
+    // startClimbing();
 });
 
 let touchStartY = 0;
@@ -574,8 +564,11 @@ function startClimbing() {
     function climb() {
         let elapsedTime = (Date.now() - startTime) / 1000; // Time elapsed in seconds
 
-        if (!isClimbing || elapsedTime >= climbDuration ||
-            (climbDirection == -1 && characterControls.model.position.y < 1)) {
+        if (
+            !isClimbing ||
+            elapsedTime >= climbDuration ||
+            (climbDirection == -1 && characterControls.model.position.y < 1)
+        ) {
             isClimbing = false; // Finish climbing after specified duration
             resetScrolling(); // Allow user to scroll again after auto-climb finishes
             keysPressed["w"] = false;
@@ -596,12 +589,11 @@ function startClimbing() {
             const targetPosition = targetStep.position.clone();
             characterControls.model.position.lerp(targetPosition, 0.05);
 
-
             // Update character position to match current step's position
             characterControls.model.position.set(
                 targetStep.position.x,
                 targetStep.position.y,
-                targetStep.position.z
+                targetStep.position.z,
             );
 
             // Adjust rotation direction based on climb direction
@@ -610,14 +602,14 @@ function startClimbing() {
                 characterControls.model.rotation.set(
                     targetStep.rotation.x,
                     targetStep.rotation.y,
-                    targetStep.rotation.z
+                    targetStep.rotation.z,
                 );
             } else {
                 keysPressed["w"] = true;
                 characterControls.model.rotation.set(
                     targetStep.rotation.x,
                     targetStep.rotation.y + Math.PI,
-                    targetStep.rotation.z
+                    targetStep.rotation.z,
                 );
             }
         }
@@ -628,7 +620,7 @@ function startClimbing() {
         // Continue animating
         requestAnimationFrame(climb);
     }
-    ``
+    ``;
     // Start the climbing loop
     climb();
 }
