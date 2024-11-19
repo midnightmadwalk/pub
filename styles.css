@@ -11,3 +11,40 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
 }
+*{
+  background: black;
+}
+div{
+  left: 50%;
+  transform: translateY(0%) rotate(45deg);
+  
+                opacity: 0;
+}
+
+@keyframes scrollup {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+@keyframes scrolldown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
