@@ -58,6 +58,13 @@
     color: antiquewhite;
     font-family: Arial, sans-serif;
 }
+.scroll-container {
+display: flex;
+align-items: center;
+gap: 1em; /* Space between arrows and text */
+position: relative;
+margin: 20px; /* Add some spacing */
+}
   </style>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -65,6 +72,7 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script> -->
+<div class="scroll-container">
 <!-- partial:index.partial.html -->
 <div style="width: 0; height: 0; background-color: transparent; z-index: 80; 
             bottom: 20px; position: absolute; border-width: 1em 1em 0 1em; border-style: solid; border-color: antiquewhite transparent transparent transparent; animation: scrolldown 1.2s ease-in-out infinite 0.15s;"></div>
@@ -75,7 +83,7 @@
 <div style="width: 0; height: 0; background-color: transparent; z-index: 80; 
             bottom: 110px; position: absolute; border-width: 1em 1em 0 1em; border-style: solid; border-color: antiquewhite transparent transparent transparent; animation: scrolldown 1.2s ease-in-out infinite 0.6s;"></div>
       <div class="scroll-text">Scroll up one time</div>
-
+</div>
 <!-- Upward Scrolling Arrows -->
 <div style="width: 0; height: 0; background-color: transparent; z-index: 80; 
             top: 20px; position: absolute; border-width: 0 1em 1em 1em; border-style: solid; border-color: transparent transparent antiquewhite transparent; animation: scrollup 1.2s ease-in-out infinite 0.15s;"></div>
