@@ -11,6 +11,11 @@ let { width: w, height: h } = threeCanvas.getBoundingClientRect();
 renderer.setSize(w, h);
 threeCanvas.appendChild(renderer.domElement);
 
+let arrows = document.querySelectorAll(".arrow");
+arrows.forEach((arrow) => {
+    arrow.style.display = "none";
+});
+
 const W = "w";
 const A = "a";
 const S = "s";
@@ -363,6 +368,9 @@ function animate2() {
             if (distance < 1) {
                 isClimbing = false;
                 hasScrolled = false;
+                arrows.forEach((arrow) => {
+                    arrow.style.display = "block";
+                });
                 if (currentPortalIndex !== index) {
                     currentPortalIndex = index;
                     const portalImage = document.getElementById("portalImage");
@@ -437,6 +445,11 @@ document.addEventListener("touchend", (event) => {
 function startClimbing() {
     isClimbing = true;
     let startTime = Date.now();
+    arrows.forEach((arrow) => {
+        arrow.style.display = "none";
+    });
+    document.getElementById("overlay").style.display = "none";
+    currentPortalIndex = -1;
     function climb() {
         let elapsedTime = (Date.now() - startTime) / 1000;
 
@@ -481,8 +494,6 @@ function startClimbing() {
             }
         }
         updateCameraPosition();
-        document.getElementById("overlay").style.display = "none";
-        currentPortalIndex = -1;
         requestAnimationFrame(climb);
     }
     climb();
