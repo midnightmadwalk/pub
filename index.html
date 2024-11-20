@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Spiral Staircase Around Old Tree - Three.js</title>
+        <title>A1A Ecosystem</title>
         <style>
             * {
                 padding: 0;
@@ -90,8 +90,39 @@
                     background-color: black;
                 }
             }
+            @keyframes scrollup {
+                0% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+            }
+            @keyframes scrolldown {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+            }
         </style>
-        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <div
@@ -212,135 +243,133 @@
             "
         ></div>
 
-
-
         <!-- Right side -->
 
         <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 20px;
-            position: absolute;
-            top: 50%;
-            right: 0;
-            border-width: 1em 1em 0 1em;
-            border-style: solid;
-            border-color: antiquewhite transparent transparent transparent;
-            animation: scrolldown 1.2s ease-in-out infinite 0.15s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 50px;
-            top: 53%;
-            position: absolute;
-            right: 0;
-            border-width: 1em 1em 0 1em;
-            border-style: solid;
-            border-color: antiquewhite transparent transparent transparent;
-            animation: scrolldown 1.2s ease-in-out infinite 0.3s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 80px;
-            top: 56%;
-            position: absolute;
-            right: 0;
-            border-width: 1em 1em 0 1em;
-            border-style: solid;
-            border-color: antiquewhite transparent transparent transparent;
-            animation: scrolldown 1.2s ease-in-out infinite 0.45s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 110px;
-            top: 59%;
-            position: absolute;
-            right: 0;
-            border-width: 1em 1em 0 1em;
-            border-style: solid;
-            border-color: antiquewhite transparent transparent transparent;
-            animation: scrolldown 1.2s ease-in-out infinite 0.6s;
-        "
-    ></div>
-    <!-- Upward Scrolling Arrows -->
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 50%;
-            position: absolute;
-            right: 0;
-            border-width: 0 1em 1em 1em;
-            border-style: solid;
-            border-color: transparent transparent antiquewhite transparent;
-            animation: scrollup 1.2s ease-in-out infinite 0.15s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 53%;
-            position: absolute;
-            right: 0;
-            border-width: 0 1em 1em 1em;
-            border-style: solid;
-            border-color: transparent transparent antiquewhite transparent;
-            animation: scrollup 1.2s ease-in-out infinite 0.3s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 56%;
-            position: absolute;
-            right: 0;
-            border-width: 0 1em 1em 1em;
-            border-style: solid;
-            border-color: transparent transparent antiquewhite transparent;
-            animation: scrollup 1.2s ease-in-out infinite 0.45s;
-        "
-    ></div>
-    <div
-        style="
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            z-index: 80;
-            bottom: 59%;
-            position: absolute;
-            right: 0;
-            border-width: 0 1em 1em 1em;
-            border-style: solid;
-            border-color: transparent transparent antiquewhite transparent;
-            animation: scrollup 1.2s ease-in-out infinite 0.6s;
-        "
-    ></div>
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 20px;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50px;
+                top: 53%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 80px;
+                top: 56%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 110px;
+                top: 59%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+        <!-- Upward Scrolling Arrows -->
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 53%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 56%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 59%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
 
         <section class="bezel"></section>
         <section class="film-lines">
