@@ -225,12 +225,6 @@ const cube = new THREE.Mesh(cubeGeometry, cubeMaterials);
 cube.position.set(0, 0, 0); // Centered in the scene (but will surround the camera)
 scene.add(cube);
 
-// Update cube's position to always follow the camera
-function updateSkyboxPosition() {
-    // Set the skybox to a fixed position relative to the world
-    cube.position.set(camera.position.x, camera.position.y, camera.position.z);
-}
-
 const earth = scene.getObjectByName("earth"); // Assuming earth is added with a name
 if (earth) {
     earth.position.set(camera.position.x, -50, camera.position.z); // Keeping it below the camera
@@ -269,7 +263,6 @@ new GLTFLoader().load(
 
         // Rotate the model to face the reverse direction (180 degrees around the Y-axis)
         model.rotation.y = Math.PI; // 180 degrees in radians
-        ``;
         // Set shadow properties
         model.traverse(function (object) {
             if (object.isMesh) object.castShadow = true;
@@ -402,7 +395,6 @@ for (let i = 0; i < steps; i++) {
 
 // Portal rings
 var rings = [];
-var isNearRing = false;
 function createTextRing(stepIndex) {
     const angle = stepIndex * angleIncrement;
     const x = radius * Math.cos(angle);
@@ -426,7 +418,6 @@ function createTextRing(stepIndex) {
 for (let i = 1; i < 6; i++) {
     rings.push(createTextRing(i * Math.floor(steps / 5)));
 }
-let justOutsideRing = false;
 
 function animate2() {
     let mixerUpdateDelta = clock.getDelta();
@@ -436,7 +427,7 @@ function animate2() {
 
     if ((rings, characterControls)) {
         rings.forEach(({ ring, x, y, z }, index) => {
-            // ring.rotation.y += 0.01;
+            ring.rotation.y += 0.01;
 
             // Check if the character is close enough to the portal ring
             const distance = characterControls.model.position.distanceTo(
@@ -446,7 +437,6 @@ function animate2() {
             if (distance < 1) {
                 isClimbing = false; // Finish climbing after specified duration
                 hasScrolled = false;
-                isNearRing = true;
                 // Adjust the threshold as needed
                 // Show the portal image if not already shown
                 if (currentPortalIndex !== index) {
@@ -467,14 +457,6 @@ function animate2() {
                 }
             }
         });
-    }
-
-    // Hide the image after a certain time (e.g., 5 seconds)
-    if (currentPortalIndex >= 0) {
-        setTimeout(() => {
-            document.getElementById("overlay").style.display = "none";
-            currentPortalIndex = -1;
-        }, 500); // Adjust the time as needed
     }
 
     // Log the current camera position
@@ -521,14 +503,13 @@ window.addEventListener("DOMContentLoaded", async (event) => {
     climbDirection = 1;
     if (isClimbing || hasScrolled) return; // Ignore scroll if already climbing or scrolled once
 
-    // Set hasScrolled to true to prevent further manual scrolling
-    // hasScrolled = true;
+    hasScrolled = true;
 
-    // // Prevent default scroll behavior
-    // event.preventDefault();
+    // Prevent default scroll behavior
+    event.preventDefault();
 
-    // // Start climbing the stairs automatically
-    // startClimbing();
+    // Start climbing the stairs automatically
+    startClimbing();
 });
 
 let touchStartY = 0;
@@ -616,11 +597,12 @@ function startClimbing() {
 
         // Programmatically update camera position to follow character
         updateCameraPosition();
+        document.getElementById("overlay").style.display = "none";
+            currentPortalIndex = -1;
 
         // Continue animating
         requestAnimationFrame(climb);
     }
-    ``;
     // Start the climbing loop
     climb();
 }

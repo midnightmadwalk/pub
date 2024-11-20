@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -14,15 +14,15 @@
             body {
                 margin: 0;
                 overflow: hidden;
+                position: relative;
+                display: flex;
             }
 
             #overlay {
                 position: absolute;
-                top: 0;
-                left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(255, 255, 255, 0.9);
+                background-color: rgba(255, 255, 255, 0.98);
                 display: none;
                 justify-content: center;
                 align-items: center;
@@ -31,23 +31,37 @@
 
             #overlay img {
                 max-width: 80%;
-                max-height: 80%;
+                height: 84%;
+            }
+
+            .film-lines {
+                position: relative;
+                max-height: 100vh;
+                min-width: min(1440px, 100vw);
+                display: block;
             }
 
             .menu {
-                background: #181818;
-                padding: 20px;
-                z-index: 100;
-                width: 100%;
+                position: absolute;
+                min-height: 70px;
+                min-width: 100%;
+                background-color: rgba(0, 0, 0, 1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-
+            .top-menu {
+                top: 0;
+            }
+            .bottom-menu {
+                bottom: 0;
+            }
             .menu ul {
                 display: flex;
                 justify-content: center;
                 list-style-type: none;
                 align-items: center;
-                gap: 32px;
-                min-height: 70px;
+                column-gap: 32px;
             }
 
             .menu a {
@@ -61,55 +75,139 @@
             }
 
             #three-canvas {
-                height: calc(100vh - 140px);
-                width: 100vw;
-                background: #000;
-                display: block;
+                width: 100%;
+                height: 100vh;
+                z-index: -200;
             }
-
             @media (min-width: 1080px) {
-                .bottom-menu {
-                    padding: 50px;
+                body {
+                    display: flex;
                 }
-                .bottom-menu > * {
-                    display: none !important;
-                }
-            }
-            @media (max-width: 1080px) {
-                .top-menu ul li a {
-                    display: none !important;
-                }
-                .logo {
-                    display: block !important;
-                }
-                .bottom-menu {
+                .bezel {
+                    width: 100%;
+                    height: 100vh;
                     background-color: black;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    min-height: 70px;
-                    z-index: 100000;
-                }
-                #mob-menu {
-                    z-index: 100000;
-                    gap: 15px;
-                }
-                #mob-menu li {
-                    font-size: 14px;
                 }
             }
         </style>
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div id="overlay">
-            <img
-                id="portalImage"
-                src="./public/pictureok.jpg"
-                alt="Portal Image"
-            />
-        </div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 20px;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50px;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 80px;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 110px;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+        <!-- Upward Scrolling Arrows -->
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                top: 20px;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                top: 50px;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                top: 80px;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                top: 110px;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+
+        <section class="bezel"></section>
         <section class="film-lines">
             <div class="menu top-menu">
                 <ul>
@@ -122,7 +220,15 @@
                     <li><a href="stats.html">Statics</a></li>
                 </ul>
             </div>
-            <div id="three-canvas"></div>
+            <div id="three-canvas">
+                <div id="overlay">
+                    <img
+                        id="portalImage"
+                        src="pictureok.jpg"
+                        alt="Portal Image"
+                    />
+                </div>
+            </div>
             <div class="menu bottom-menu">
                 <ul id="mob-menu">
                     <li><a href="lore.html">a1a-ecosyetm</a></li>
@@ -132,7 +238,8 @@
                     <li><a href="stats.html">Statics</a></li>
                 </ul>
             </div>
-            <script src="index.js" type="module"></script>
         </section>
+        <section class="bezel"></section>
+        <script src="index.js" type="module"></script>
     </body>
 </html>
