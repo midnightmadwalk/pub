@@ -466,8 +466,8 @@ function animate2() {
 // Array of portal images
 var portalImages = [
     "pictureok.jpg",
-    "pictureok1.jpg",
-    "pictureok2.jpg",
+    "arc.jpg",
+    "arc.jpg",
     "pictureok3.jpg",
     "pictureok4.jpg",
 ];
@@ -598,7 +598,7 @@ function startClimbing() {
         // Programmatically update camera position to follow character
         updateCameraPosition();
         document.getElementById("overlay").style.display = "none";
-            currentPortalIndex = -1;
+        currentPortalIndex = -1;
 
         // Continue animating
         requestAnimationFrame(climb);
