@@ -451,11 +451,9 @@ function startClimbing() {
     document.getElementById("overlay").style.display = "none";
     currentPortalIndex = -1;
     function climb() {
-        let elapsedTime = (Date.now() - startTime) / 1000;
 
         if (
             !isClimbing ||
-            elapsedTime >= climbDuration ||
             (climbDirection == -1 && characterControls.model.position.y < 1)
         ) {
             isClimbing = false;
