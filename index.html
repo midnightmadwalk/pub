@@ -1,85 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spiral Staircase Around Old Tree - Three.js</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-    #overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    #overlay img {
-      max-width: 80%;
-      max-height: 80%;
-    }
-    #menu-box {
-  position: absolute;
-  top: 20px; /* Adjust this to control vertical position relative to the character */
-  left: 20px; /* Adjust this to control horizontal distance from the character */
-  width: 150px; /* Width of the menu box */
-  background-color: rgba(0, 0, 0, 0.3); /* Transparent background */
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Optional, to add some shadow effect */
-  color: white;
-}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A1A Ecosystem</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
 
-#menu-box ul {
-  list-style-type: none;
-  padding: 0;
-}
+            body {
+                margin: 0;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+            }
 
-#menu-box li {
-  margin: 10px 0;
-}
+            #overlay {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                top: 70px;
+                bottom: 70px;
+            }
 
-#menu-box a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
+            #overlay img {
+                max-width: 80%;
+                height: 84%;
+            }
 
-#menu-box a:hover {
-  text-decoration: underline;
-}
+            .film-lines {
+                position: relative;
+                max-height: 100vh;
+                min-width: min(1440px, 100vw);
+                display: block;
+            }
 
-  </style>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script> -->
+            .menu {
+                position: absolute;
+                min-height: 70px;
+                min-width: 100%;
+                background-color: rgba(0, 0, 0, 1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .top-menu {
+                top: 0;
+            }
+            .bottom-menu {
+                bottom: 0;
+            }
+            .menu ul {
+                display: flex;
+                justify-content: center;
+                list-style-type: none;
+                align-items: center;
+                column-gap: 32px;
+            }
 
-  <div id="overlay">
-    <img id="portalImage" src="./public/pictureok.jpg" alt="Portal Image">
-  </div>
-  <div id="menu-box">
-    <ul>
-      <li><a href="lore.html">a1a-ecosyetm</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Tools</a></li>
-      <li><a href="stats.html">Statics</a></li>
-    </ul>
-  </div>
-  <div id="debug-info" style="position: fixed; top: 10px; right: 10px; color: white; font-size: 16px; font-family: Arial, sans-serif; z-index: 1000;"></div>
+            .menu a {
+                color: white;
+                text-decoration: none;
+            }
 
-  <script>
-    
-  </script>
-  <!-- <script src="app.js" type="module"></script> -->
-  <script src="index.js" type="module"></script>
-</body>
+            .logo {
+                width: 125px;
+                background-color: wheat;
+            }
+
+            #three-canvas {
+                width: 100%;
+                height: 100vh;
+                z-index: -200;
+            }
+            @media (min-width: 1080px) {
+                body {
+                    display: flex;
+                }
+                .bezel {
+                    width: 100%;
+                    height: 100vh;
+                    background-color: black;
+                }
+            }
+            @keyframes scrollup {
+                0% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+            }
+            @keyframes scrolldown {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 20px;
+                top: 50%;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50px;
+                top: 53%;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 80px;
+                top: 56%;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 110px;
+                top: 59%;
+                position: absolute;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+        <!-- Upward Scrolling Arrows -->
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50%;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 53%;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 56%;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 59%;
+                position: absolute;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+
+        <!-- Right side -->
+
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 20px;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50px;
+                top: 53%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 80px;
+                top: 56%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 110px;
+                top: 59%;
+                position: absolute;
+                right: 0;
+                border-width: 1em 1em 0 1em;
+                border-style: solid;
+                border-color: antiquewhite transparent transparent transparent;
+                animation: scrolldown 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+        <!-- Upward Scrolling Arrows -->
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 50%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.15s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 53%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.3s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 56%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.45s;
+            "
+        ></div>
+        <div
+            style="
+                width: 0;
+                height: 0;
+                background-color: transparent;
+                z-index: 80;
+                bottom: 59%;
+                position: absolute;
+                right: 0;
+                border-width: 0 1em 1em 1em;
+                border-style: solid;
+                border-color: transparent transparent antiquewhite transparent;
+                animation: scrollup 1.2s ease-in-out infinite 0.6s;
+            "
+        ></div>
+
+        <section class="bezel"></section>
+        <section class="film-lines">
+            <div class="menu top-menu">
+                <ul>
+                    <li><a href="lore.html">a1a-ecosyetm</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li>
+                        <img src="aia-eco.jpg" class="logo" />
+                    </li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="stats.html">Statics</a></li>
+                </ul>
+            </div>
+            <div id="three-canvas">
+                <div id="overlay">
+                    <img
+                        id="portalImage"
+                        src="pictureok.jpg"
+                        alt="Portal Image"
+                    />
+                </div>
+            </div>
+            <div class="menu bottom-menu">
+                <ul id="mob-menu">
+                    <li><a href="lore.html">a1a-ecosyetm</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="stats.html">Statics</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="bezel"></section>
+        <script src="index.js" type="module"></script>
+    </body>
 </html>
