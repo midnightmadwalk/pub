@@ -157,12 +157,12 @@ class CharacterControls {
 
 const textureLoader_cube = new THREE.TextureLoader();
 const textures = {
-    front: textureLoader_cube.load("public/collage.jpg"),
-    back: textureLoader_cube.load("public/collage.jpg"),
-    top: textureLoader_cube.load("public/collage.jpg"),
-    bottom: textureLoader_cube.load("public/collage.jpg"),
-    left: textureLoader_cube.load("public/collage.jpg"),
-    right: textureLoader_cube.load("public/collage.jpg"),
+    front: textureLoader_cube.load("collage.jpg"),
+    back: textureLoader_cube.load("collage.jpg"),
+    top: textureLoader_cube.load("collage.jpg"),
+    bottom: textureLoader_cube.load("collage.jpg"),
+    left: textureLoader_cube.load("collage.jpg"),
+    right: textureLoader_cube.load("collage.jpg"),
 };
 
 const cubeGeometry = new THREE.BoxGeometry(500, 500, 500);
@@ -201,7 +201,7 @@ light();
 
 var characterControls;
 new GLTFLoader().load(
-    "public/Soldier.glb",
+    "Soldier.glb",
     function (gltf) {
         const model = gltf.scene;
         model.position.set(5, 0, 1);
