@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,86 +12,44 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            padding: 0;
             font-family: "Lora", serif;
             background-color: #f9f6ea;
             animation-name: toBlack;
             animation-duration: 6s;
             animation-fill-mode: forwards;
-        }
 
-        .logo-container {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            z-index: 10;
-        }
-
-        .logo, .card {
-            padding: 10px;
-            background-color: white;
-            border-radius: 10px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .logo {
-            height: 100px;
-            width: auto;
-        }
-
-        .card {
-            width: 120px;
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-            font-size: 14px;
-        }
-
-        .card a {
-            color: #333;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .card a:hover {
-            color: rgb(219, 18, 142);
-        }
-
-        .container {
             position: relative;
-            width: 100%;
             height: 100vh;
-            background-image: url('collage.jpg');
-            background-repeat: repeat-x;
+            background-image: url('collage_bw.png');
             background-size: auto 100%;
             animation: move-image 20s linear infinite;
         }
+
+
+
+
+
+
 
         @keyframes move-image {
             0% {
                 background-position: 0 0;
             }
+
             50% {
                 background-position: -100% 0;
             }
+
             100% {
                 background-position: -200% 0;
             }
         }
 
-        .text-box {
+        /* .text-box {
             position: absolute;
             top: 20%;
             left: 10%;
-            width: 80%;
             padding: 20px;
             background-color: rgba(0, 0, 0, 1);
             color: white;
@@ -106,15 +65,17 @@
             animation-name: toRed;
             animation-duration: 7s;
             animation-fill-mode: forwards;
-        }
+        } */
 
         @keyframes toBlack {
             0% {
                 background-color: #f9f6ea;
             }
+
             60% {
                 background-color: #f9f6ea;
             }
+
             100% {
                 background-color: black;
             }
@@ -124,39 +85,131 @@
             0% {
                 color: white;
             }
+
             50% {
                 color: white;
             }
+
             100% {
                 color: rgb(219, 18, 142);
             }
         }
+
+        .ecosystem {
+            margin: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            justify-content: center;
+            max-width: 720px;
+            margin-inline: auto;
+            padding: 1rem;
+        }
+
+        .ecosystem-tokens {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .token-card {
+            background-color: rgb(0, 0, 0);
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            color: #b6bef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .token-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+
+        .token-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .token-img h3 {
+            font-family: "Merriweather", serif;
+            font-size: 1.25rem;
+        }
+
+        .token-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .token-details {
+            text-wrap: wrap;
+        }
+
+        .token-actions a {
+            display: inline-block;
+            background-color: #ff529b;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .token-actions a:hover {
+            background-color: #e04386;
+        }
+
+        #filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #filter-container label {
+            font-family: "IBM Plex Sans", sans-serif;
+            font-weight: 500;
+            color: #b6bef2;
+        }
+
+        #ecosystem-filter {
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #b6bef2;
+            background-color: #202544;
+            color: #b6bef2;
+            font-family: "IBM Plex Sans", sans-serif;
+            font-size: 16px;
+        }
     </style>
 </head>
+
 <body>
     <!-- Fixed logo with cards on either side -->
     <div class="logo-container">
-        <!-- Left card with links -->
-        <div class="card">
-            <a href="index.html">Home</a>
-            <a href="#section2">statics</a>
-            <a href="#section3">tools</a>
-        </div>
-
-        <!-- Logo in the center -->
-        <img src="logo.png" alt="Logo" class="logo">
-
-        <!-- Right card with links -->
-        <div class="card">
-            <a href="#section4">contact</a>
-            <a href="#section5">Blog</a>
-            <a href="#section6">FAQ</a>
-        </div>
     </div>
 
     <div class="container">
-        <div class="text-box">
-            <span>On an exceptionally hot evening early in July a young man came out of the garret in which he lodged in S. Place and walked slowly, as though in hesitation, towards K. bridge. He had successfully avoided meeting his landlady on the staircase. His garret was under the roof of a high, five-storied house and was more like a cupboard than a room. The landlady who provided him with garret, dinners, and attendance, lived on the floor below, and every time he went out he was obliged to pass her kitchen, the door of which invariably stood open.</span>
+        <div id="filter-container">
+            <label for="ecosystem-filter">Filter by Ecosystem:</label>
+            <select id="ecosystem-filter">
+                <option value="all">All Ecosystems</option>
+            </select>
+        </div>
+
+        <!-- Ecosystem Cards -->
+        <div id="ecosystem-container">
+            <!-- Content will be dynamically injected here -->
         </div>
     </div>
 
@@ -164,7 +217,7 @@
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/267285/jquery.lettering.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/267285/jquery.textillate.js'></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('span').textillate({
                 initialDelay: 100,
                 loop: false,
@@ -179,5 +232,98 @@
             });
         });
     </script>
+    <script>
+        const jsonUrl = 'final_ecosystem_V2.json';
+
+        let ecosystemsData = []; // To store JSON data globally
+
+        // Fetch JSON data and render content
+        async function loadEcosystems() {
+            try {
+                const response = await fetch(jsonUrl);
+                const data = await response.json();
+                ecosystemsData = data.ecosystems;
+
+                populateFilter(data.ecosystems); // Populate filter dropdown
+                renderEcosystems('all'); // Render all ecosystems initially
+            } catch (error) {
+                console.error('Error loading ecosystems:', error);
+            }
+        }
+
+        // Populate the filter dropdown
+        function populateFilter(ecosystems) {
+            const filter = document.getElementById('ecosystem-filter');
+            let filterOptions = '<option value="all">All Ecosystems</option>';
+            ecosystems.forEach((ecosystem, index) => {
+                filterOptions += `<option value="${index}">${ecosystem.name}</option>`;
+            });
+            filter.innerHTML = filterOptions;
+
+            // Add change event listener to filter dropdown
+            filter.addEventListener('change', (event) => {
+                const selectedEcosystem = event.target.value;
+                renderEcosystems(selectedEcosystem);
+            });
+        }
+
+        // Render ecosystems based on the selected filter
+        function renderEcosystems(filterValue) {
+            const container = document.getElementById('ecosystem-container');
+            container.innerHTML = ''; // Clear previous content
+
+            const filteredEcosystems =
+                filterValue === 'all'
+                    ? ecosystemsData
+                    : [ecosystemsData[filterValue]];
+
+            let ecosystemHTML = '';
+            filteredEcosystems.forEach(ecosystem => {
+                let tokensHTML = '';
+
+                ecosystem.tokens.forEach(token => {
+                    // Create token details
+                    const chartLinksHTML = token.chart
+                        .map(link => `<a href="${link}" target="_blank">View Chart</a>`)
+                        .join('');
+
+                    const img = token.logo || "pngegg"
+                    tokensHTML += `
+        <div class="token-card">
+          <div class="token-img">
+            <img src="${img}" alt="${token.name} Logo">
+            <h3>${token.name} (${token.ticker})</h3>
+          </div>
+          <div class="token-details">
+            <p><strong>Contract:</strong> ${token.contract_address}</p>
+            <p><strong>Supply:</strong> ${token.supply}</p>
+            <p><strong>Buy Tax:</strong> ${token.buy_tax}%</p>
+            <p><strong>Sell Tax:</strong> ${token.sell_tax}%</p>
+            <p>${token.description}</p>
+            <div class="token-actions">
+              ${chartLinksHTML}
+            </div>
+          </div>
+        </div>`;
+                });
+
+                ecosystemHTML += `
+      <div class="ecosystem">
+      <img src="${ecosystem.name.toLowerCase().replace(/\s+/g, '_')}.png" alt="${ecosystem.name} Image">
+        <div class="ecosystem-tokens">
+          ${tokensHTML}
+        </div>
+      </div>`;
+            });
+
+            container.innerHTML = ecosystemHTML;
+        }
+
+        // Load ecosystems on page load
+        document.addEventListener('DOMContentLoaded', loadEcosystems);
+
+    </script>
+
 </body>
+
 </html>
