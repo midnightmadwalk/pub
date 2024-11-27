@@ -383,11 +383,11 @@ function animate2() {
 }
 
 var portalImages = [
-    "pictureok.jpg",
-    "arc.jpg",
-    "arc.jpg",
-    "pictureok3.jpg",
-    "pictureok4.jpg",
+    "SWD1.jpg",
+    "SWD2.jpg",
+    "SWD3.jpg",
+    "WABI1.jpg",
+    "WABI2.jpg",
 ];
 var currentPortalIndex = -1;
 
