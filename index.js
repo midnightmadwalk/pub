@@ -383,7 +383,7 @@ function animate2() {
 }
 
 var portalImages = [
-    "SWD1.jpg",
+    "public/SWD1.jpg",
     "SWD2.jpg",
     "SWD3.jpg",
     "WABI1.jpg",
