@@ -391,9 +391,9 @@ function animate2() {
 }
 
 var portalImages = [
-    "/SWD1.jpg",
-    "/SWD2.jpg",
-    "/SWD3.jpg",
+    "/SWD1.png",
+    "/SWD2.png",
+    "/SWD3.png",
     "/WABI1.jpg",
     "/WABI2.jpg",
 ];
