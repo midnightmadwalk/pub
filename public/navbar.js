@@ -8,7 +8,7 @@ const body_before = `<section class="bezel"></section>
                     <li>
                         <img src="aia-eco.jpg" class="logo" />
                     </li>
-                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                     <li><a href="stats.html">Statics</a></li>
                 </ul>
             </div>`;
