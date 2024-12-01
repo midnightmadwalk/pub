@@ -1,242 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>countup.js - Animate numbers with Class Selectors</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="./style.css">
-  <style>
-    /* Add your previous styles here */
-    .counter-container {
-      text-align: center;
-      margin: 20px;
-    }
-    .counter-label {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .statistic {
-      display: block;
-      padding: 2rem;
-      font-size: 6rem;
-      font-weight: 700;
-    }
-  </style>
-  <style>
-    @import url("https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i");
-input:focus {
-  outline: none;
-}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stats</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+        .stats_body {
+            background: black;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-html {
-  box-sizing: border-box;
-  height: 100%;
-  font-size: 10px;
-}
+        .counter-container {
+            text-align: center;
+            margin: 20px;
+        }
 
-body {
-  font-family: "Karla", sans-serif;
-  min-height: 100%;
-  background: black;
-  color: white;
-  font-size: 1.6rem;
-  line-height: 1.75;
-}
+        .counter-label {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-*,
-*:before,
-*:after {
-  -webkit-font-smoothing: antialiased;
-  box-sizing: inherit;
-}
+        .statistic {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            padding: 1rem;
+            display: inline-block;
+            color: white;
+        }
 
-*:focus {
-  outline: none;
-}
+        /* Buttons and form elements (if applicable) */
+        input,
+        button {
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: 1px solid white;
+            border-radius: 6px;
+            background: transparent;
+            color: white;
+            transition: background 0.2s ease;
+        }
 
-::-webkit-input-placeholder {
-  color: white;
-}
-
-:-moz-placeholder {
-  color: white;
-}
-
-::-moz-placeholder {
-  color: white;
-}
-
-:-ms-input-placeholder {
-  color: white;
-}
-
-::-moz-selection {
-  color: black;
-  background: white;
-}
-
-::selection {
-  color: black;
-  background: white;
-}
-
-label {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 0 0 2rem;
-}
-label:hover {
-  cursor: pointer;
-}
-label.text span {
-  line-height: 1;
-  width: 100%;
-  display: block;
-  margin: 0 0 1rem;
-}
-label.text input {
-  width: 100%;
-  display: block;
-}
-label.checkbox input, label.radio input {
-  margin: 0 1rem 0 0;
-}
-
-input[type=checkbox],
-input[type=radio] {
-  transition: all 0.2s ease-in-out;
-  display: inline-block;
-  background-size: 1em;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path d='M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z'/></svg>");
-}
-input[type=checkbox]:checked,
-input[type=radio]:checked {
-  background-color: white;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' width='1792' height='1792' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z'/></svg>");
-}
-
-input[type=radio] {
-  border-radius: 10rem;
-}
-
-select,
-input {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: none;
-  padding: 0.75em;
-  border-radius: 6px;
-  background-color: transparent;
-  line-height: 1;
-  border: 1px solid white;
-  color: white;
-  display: block;
-  font-size: inherit;
-}
-select:hover,
-input:hover {
-  cursor: pointer;
-}
-
-button,
-.button {
-  font-size: inherit;
-  font-weight: 700;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: none;
-  padding: 1em 2em;
-  border-radius: 6px;
-  background: white;
-  color: black;
-  display: inline-block;
-  margin: 1rem 0 2rem;
-  text-align: center;
-  line-height: 1;
-  text-decoration: none;
-}
-button .button--block,
-.button .button--block {
-  display: block;
-  width: 100%;
-}
-button:hover,
-.button:hover {
-  cursor: pointer;
-  background-color: #f2f2f2;
-}
-
-a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-sup {
-  display: inline-block;
-  font-size: 0.75em;
-  vertical-align: super;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.statistic {
-  display: block;
-  padding: 2rem;
-  font-size: 6rem;
-  font-weight: 700;
-}
-</style>
+        input:focus,
+        button:hover {
+            outline: none;
+            cursor: pointer;
+            background: white;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
+    <!-- Stats Section -->
+    <section class="stats_body">
+        <div class="counter-container">
+            <div class="counter-label">Total Tokens in Ecosystem</div>
+            <p class="statistic" aria-live="polite">500</p>
+        </div>
+        <div class="counter-container">
+            <div class="counter-label">Total Transactions Across Ecosystem</div>
+            <p class="statistic" aria-live="polite">1000</p>
+        </div>
+        <div class="counter-container">
+            <div class="counter-label">Total Burned Pdai 🔥</div>
+            <p class="statistic" aria-live="polite">1223344</p>
+        </div>
+    </section>
 
-<div class="counter-container">
-  <div class="counter-label">total tokens in ecosystem</div>
-  <p class="statistic">500</p>
-</div>
-<div class="counter-container">
-  <div class="counter-label">total transactions across ecosystem</div>
-  <p class="statistic">1000</p>
-</div>
-<div class="counter-container">
-  <div class="counter-label">total burned pdai 🔥</div>
-  <p class="statistic">1223344</p>
-</div>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.5/countUp.min.js"></script>
+    <script src="/navbar.js"></script>
+    <script>
+        // Count-up animation options
+        const countUpOptions = {
+            useEasing: true,
+            useGrouping: true,
+            separator: ",",
+            decimal: ".",
+        };
 
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.5/countUp.min.js'></script>
-<script>
-    // Options for count-up animation
-    var options = {
-      useEasing: true,
-      useGrouping: true,
-      separator: ",",
-      decimal: "."
-    };
+        // Initialize count-up animations
+        $(document).ready(() => {
+            $(".statistic").each((index, element) => {
+                const value = parseInt($(element).text().replace(/,/g, ""), 10) || 0;
 
-    // Find all Statistics on page, put them inside a variable
-    var statistics = $(".statistic");
-
-    // For each Statistic we find, animate it
-    statistics.each(function(index) {
-      // Find the value we want to animate (what lives inside the p tags)
-      var value = $(statistics[index]).html();
-      // Start animating
-      var statisticAnimation = new CountUp(statistics[index], 0, value, 0, 5, options);
-      statisticAnimation.start();
-    });
-</script>
+                // Ensure valid input
+                if (!isNaN(value)) {
+                    const animation = new CountUp(element, 0, value, 0, 2.5, countUpOptions);
+                    animation.start();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

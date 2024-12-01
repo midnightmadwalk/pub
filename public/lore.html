@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crime and Punishment 123</title>
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/267285/animate.min.css'>
+    <title>About</title>
     <link rel="stylesheet" href="./style.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Lora", serif;
-            background-color: #f9f6ea;
+        .lore_section {
             animation-name: toBlack;
             animation-duration: 6s;
             animation-fill-mode: forwards;
@@ -23,13 +16,8 @@
             background-image: url('collage_bw.png');
             background-size: auto 100%;
             animation: move-image 20s linear infinite;
+            overflow-y: scroll;
         }
-
-
-
-
-
-
 
         @keyframes move-image {
             0% {
@@ -44,28 +32,6 @@
                 background-position: -200% 0;
             }
         }
-
-        /* .text-box {
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 1);
-            color: white;
-            font-size: 24px;
-            line-height: 1.5;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        div span {
-            font-size: 2rem;
-            line-height: 3rem;
-            animation-name: toRed;
-            animation-duration: 7s;
-            animation-fill-mode: forwards;
-        } */
-
         @keyframes toBlack {
             0% {
                 background-color: #f9f6ea;
@@ -194,23 +160,25 @@
 </head>
 
 <body>
-    <!-- Fixed logo with cards on either side -->
-    <div class="logo-container">
-    </div>
+    <section class="lore_section">
 
-    <div class="container">
-        <div id="filter-container">
-            <label for="ecosystem-filter">Filter by Ecosystem:</label>
-            <select id="ecosystem-filter">
-                <option value="all">All Ecosystems</option>
-            </select>
+        <div class="logo-container">
         </div>
-
-        <!-- Ecosystem Cards -->
-        <div id="ecosystem-container">
-            <!-- Content will be dynamically injected here -->
+        
+        <div class="container">
+            <div id="filter-container">
+                <label for="ecosystem-filter">Filter by Ecosystem:</label>
+                <select id="ecosystem-filter">
+                    <option value="all">All Ecosystems</option>
+                </select>
+            </div>
+            
+            <!-- Ecosystem Cards -->
+            <div id="ecosystem-container">
+                <!-- Content will be dynamically injected here -->
+            </div>
         </div>
-    </div>
+    </section>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/267285/jquery.lettering.js'></script>
@@ -234,7 +202,7 @@
     <script>
         const jsonUrl = 'final_ecosystem_V2.json';
 
-        let ecosystemsData = []; // To store JSON data globally
+        let ecosystemsData = [];
 
         // Fetch JSON data and render content
         async function loadEcosystems() {
@@ -322,7 +290,7 @@
         document.addEventListener('DOMContentLoaded', loadEcosystems);
 
     </script>
-
+    <script src="navbar.js"></script>
 </body>
 
 </html>

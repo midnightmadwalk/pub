@@ -4,128 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>A1A Ecosystem</title>
-        <style>
-            * {
-                padding: 0;
-                margin: 0;
-                box-sizing: border-box;
-            }
-
-            body {
-                margin: 0;
-                overflow: hidden;
-                position: relative;
-                display: flex;
-            }
-
-            #overlay {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(255, 255, 255, 0.98);
-                display: none;
-                justify-content: center;
-                align-items: center;
-                top: 70px;
-                bottom: 70px;
-            }
-
-            #overlay img {
-                max-width: 80%;
-                height: 84%;
-            }
-
-            .film-lines {
-                position: relative;
-                max-height: 100vh;
-                min-width: min(1440px, 100vw);
-                display: block;
-            }
-
-            .menu {
-                position: absolute;
-                min-height: 70px;
-                min-width: 100%;
-                background-color: rgba(0, 0, 0, 1);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .menu ul {
-                display: flex;
-                justify-content: center;
-                list-style-type: none;
-                align-items: center;
-                column-gap: 32px;
-            }
-
-            .menu a {
-                color: white;
-                text-decoration: none;
-            }
-            .top-menu {
-                top: 0;
-            }
-            .bottom-menu {
-                bottom: 0;
-            }
-            .bottom-menu ul {
-                display: none;
-            }
-
-            .logo {
-                width: 125px;
-                background-color: wheat;
-            }
-
-            #three-canvas {
-                width: 100%;
-                height: 100vh;
-                z-index: -200;
-            }
-            @media (min-width: 1080px) {
-                body {
-                    display: flex;
-                }
-                .bezel {
-                    width: 100%;
-                    height: 100vh;
-                    background-color: black;
-                }
-            }
-            @keyframes scrollup {
-                0% {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-
-                50% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                100% {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-            }
-            @keyframes scrolldown {
-                0% {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                50% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-
-                100% {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div
@@ -389,40 +268,12 @@
                 animation: scrollup 1.2s ease-in-out infinite 0.6s;
             "
         ></div>
-
-        <section class="bezel"></section>
-        <section class="film-lines">
-            <div class="menu top-menu">
-                <ul>
-                    <li><a href="lore.html">a1a-ecosyetm</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li>
-                        <img src="aia-eco.jpg" class="logo" />
-                    </li>
-                    <li><a href="#">Tools</a></li>
-                    <li><a href="stats.html">Statics</a></li>
-                </ul>
+        <div id="three-canvas">
+            <div id="overlay">
+                <img id="portalImage" src="/pictureok.jpg" alt="Portal Image" />
             </div>
-            <div id="three-canvas">
-                <div id="overlay">
-                    <img
-                        id="portalImage"
-                        src="/pictureok.jpg"
-                        alt="Portal Image"
-                    />
-                </div>
-            </div>
-            <div class="menu bottom-menu">
-                <ul id="mob-menu">
-                    <li><a href="lore.html">a1a-ecosyetm</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Tools</a></li>
-                    <li><a href="stats.html">Statics</a></li>
-                </ul>
-            </div>
-        </section>
-        <section class="bezel"></section>
+        </div>
         <script src="index.js" type="module"></script>
+        <script src="/navbar.js"></script>
     </body>
 </html>
